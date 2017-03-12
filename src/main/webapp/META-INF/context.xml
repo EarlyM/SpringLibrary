@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/">
+
+    <Resource name="jdbc/spring_library"
+              auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/spring_library"
+              username="root"
+              password="root"
+              maxTotal="15"
+              maxIdle="20"
+              minIdle="5"
+              maxWaitMillis="10000"/>
+
+</Context>
