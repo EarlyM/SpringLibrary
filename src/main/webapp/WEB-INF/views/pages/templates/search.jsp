@@ -2,7 +2,7 @@
 <div class="search">
 
 
-    <form method="get"  action="search" class="search_form" id="search_form">
+    <form method="get"  action="/searchCriterion/search" class="search_form" id="search_form">
 
 
         <input type="submit" class="button-text"/>

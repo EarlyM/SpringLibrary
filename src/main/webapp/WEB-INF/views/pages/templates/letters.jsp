@@ -4,7 +4,7 @@
 <div class="nav">
     <ul>
         <c:forEach items="${letters}" var="letter">
-            <li><a href="letter?letter=${letter}">${letter}</a></li>
+            <li><a href="/searchCriterion/letter?letter=${letter}">${letter}</a></li>
         </c:forEach>
     </ul>
 </div>

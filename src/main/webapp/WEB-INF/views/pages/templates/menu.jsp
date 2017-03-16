@@ -5,7 +5,7 @@
 
         <ul>
             <c:forEach var="g" items="${genres}">
-                <li><a href="genre?id=${g.id}">${g.name}</a></li>
+                <li><a href="/searchCriterion/genre?id=${g.id}">${g.name}</a></li>
             </c:forEach>
         </ul>
 

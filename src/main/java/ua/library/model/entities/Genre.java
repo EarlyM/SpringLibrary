@@ -1,11 +1,25 @@
 package ua.library.model.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "genre")
 public class Genre implements Serializable{
+
     private long id;
     private String name;
 
+    public Genre() {
+    }
+
+    public Genre(String name) {
+        this.name = name;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -14,6 +28,7 @@ public class Genre implements Serializable{
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }

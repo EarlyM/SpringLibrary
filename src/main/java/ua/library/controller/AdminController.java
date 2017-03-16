@@ -16,6 +16,7 @@ import ua.library.service.LibraryService;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping(value = "/admin")
 public class AdminController {
 
     @Autowired
@@ -23,6 +24,20 @@ public class AdminController {
 
     @Autowired
     private AdministrationService administrationService;
+
+
+    @RequestMapping(value = "form",method = RequestMethod.GET)
+    public String getBookForm(@RequestParam(value = "id", defaultValue = "0") Long id, Model model){
+        BookForm bookForm;
+        if(id != 0){
+            Book book = libraryService.findBookById(id);
+            bookForm = new BookForm(book);
+        } else {
+            bookForm = new BookForm();
+        }
+        model.addAttribute("bookForm", bookForm);
+        return "pages/form";
+    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addBook(@Valid @ModelAttribute("bookForm") BookForm bookForm, BindingResult bindingResult, Model model){
@@ -46,19 +61,6 @@ public class AdminController {
         }
         administrationService.editBook(bookForm);
         return "redirect:/";
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String getBookForm(@RequestParam(value = "id", defaultValue = "0") Long id, Model model){
-        BookForm bookForm;
-        if(id != 0){
-            Book book = libraryService.findBookById(id);
-            bookForm = new BookForm(book);
-        } else {
-            bookForm = new BookForm();
-        }
-        model.addAttribute("bookForm", bookForm);
-        return "pages/form";
     }
 
 }

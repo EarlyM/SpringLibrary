@@ -2,6 +2,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>Library</title>
@@ -18,7 +19,9 @@
 
         <div class="book_list">
             <div class="right-content">
-                <div class="add-div"><button class="add-button"><a class="" href="/admin">Добавить</a></button></div>
+                <sec:authorize access="hasRole('ADMIN')">
+                <div class="add-div"><button class="add-button"><a class="" href="/admin/form">Добавить</a></button></div>
+                </sec:authorize>
                 <c:forEach items="${pages.books}" var="b">
                     <div class="item">
                         <img src="/content/img=${b.id}">
@@ -35,8 +38,10 @@
                         </div>
                         <button class="mr"><a class="read" href="/content/read=${b.id}" target="_blank">Читать</a></button>
                         <button class="mr"><a class="download" href="/content/download/id=${b.id}&name=${b.name}">Скачать</a></button>
-                        <button class="mr"><a class="edit" href="/admin?id=${b.id}">Изменить</a></button>
-                        <button class="delete-button"><a class="delete" href="/delete?id=${b.id}">Удалить</a></button>
+                        <sec:authorize access="hasRole('ADMIN')">
+                        <button class="mr"><a class="edit" href="/admin/form?id=${b.id}">Изменить</a></button>
+                        <button class="delete-button"><a class="delete" href="/admin/delete?id=${b.id}">Удалить</a></button>
+                        </sec:authorize>
                     </div>
                 </c:forEach>
             </div>

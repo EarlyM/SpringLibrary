@@ -13,8 +13,8 @@
     <%@include file="templates/search.jsp"%>
     <%@include file="templates/letters.jsp" %>
 
-    <spring:url value="/add" var="add"/>
-    <spring:url value="/edit" var="edit"/>
+    <spring:url value="/admin/add" var="add"/>
+    <spring:url value="/admin/edit" var="edit"/>
     <div class="content">
         <%@include file="templates/menu.jsp" %>
 

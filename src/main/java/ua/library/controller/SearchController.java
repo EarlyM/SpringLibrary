@@ -11,6 +11,7 @@ import ua.library.service.Util;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@RequestMapping(value = "/searchCriterion")
 public class SearchController {
     @Autowired
     private LibraryService libraryService;
