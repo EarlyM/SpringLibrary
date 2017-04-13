@@ -2,14 +2,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="logo">
     <img src="/resources/img/logo.png"/>
-    <div class="container" style="width: 300px;">
+</div>
+<div class="loginForm">
+    <sec:authorize access="anonymous">
+        <div class="help">
+            <a href="#">Регистрация</a>
+            <a href="#">Забили пароль?</a>
+        </div>
         <form action="/j_spring_security_check" method="post">
-            <input type="text" name="username">
-            <input type="password" name="password">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
             <button type="submit">Войти</button>
         </form>
-    </div>
-    <div class="clear"></div>
+    </sec:authorize>
+    <c:if test="${pageContext.request.userPrincipal ne null}">
+        <span><c:out value="${pageContext.request.userPrincipal.name}"/> <a href="/logout" class="a">Выйти</a></span>
+    </c:if>
+
 </div>
 
 <div class="clear"></div>

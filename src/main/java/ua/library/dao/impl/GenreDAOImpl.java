@@ -19,20 +19,17 @@ public class GenreDAOImpl implements GenreDAO {
     private SessionFactory sessionFactory;
 
 
-    @Transactional
     public List<Genre> getGenres() {
         List<Genre> genres = sessionFactory.getCurrentSession().createCriteria(Genre.class).list();
         return genres;
     }
 
-    @Transactional
     public Genre getGenreByName(String genre) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Genre.class);
         criteria.add(Restrictions.ilike("name", genre));
         return (Genre) criteria.uniqueResult();
     }
 
-    @Transactional
     public void save(Genre genre) {
         sessionFactory.getCurrentSession().save(genre);
     }

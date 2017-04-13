@@ -15,6 +15,7 @@ import ua.library.model.entities.Publisher;
 import ua.library.service.AdministrationService;
 
 @Service
+@Transactional
 public class AdministrationServiceImpl implements AdministrationService {
 
     private static final String IMG = "image";
@@ -31,13 +32,10 @@ public class AdministrationServiceImpl implements AdministrationService {
 
     @Override
     public void addBook(BookForm bookForm) {
-//        Author author = findAuthor(bookForm.getAuthor());
-//        Genre genre = findGenre(bookForm.getGenre());
-//        Publisher publisher = findPublisher(bookForm.getPublisher());
+        Author author = findAuthor(bookForm.getAuthor());
+        Genre genre = findGenre(bookForm.getGenre());
+        Publisher publisher = findPublisher(bookForm.getPublisher());
 
-        Author author = new Author(bookForm.getAuthor());
-        Genre genre = new Genre(bookForm.getGenre());
-        Publisher publisher = new Publisher(bookForm.getPublisher());
 
         Book book = new Book();
         book.setName(bookForm.getName());

@@ -12,6 +12,7 @@ import ua.library.model.BookForm;
 import ua.library.model.entities.Book;
 import ua.library.service.AdministrationService;
 import ua.library.service.LibraryService;
+import ua.library.service.Util;
 
 import javax.validation.Valid;
 
@@ -61,6 +62,14 @@ public class AdminController {
         }
         administrationService.editBook(bookForm);
         return "redirect:/";
+    }
+
+    @ModelAttribute
+    public void setAttribute(Model model){
+        if(!model.containsAttribute("genres") && !model.containsAttribute("letters")){
+            model.addAttribute("genres", libraryService.getAllGenre());
+            model.addAttribute("letters", Util.getLetters());
+        }
     }
 
 }

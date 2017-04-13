@@ -18,14 +18,12 @@ public class AuthorDAOImpl implements AuthorDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
     public Author findAuthor(String author) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Author.class);
         criteria.add(Restrictions.ilike("fio", author));
         return (Author) criteria.uniqueResult();
     }
 
-    @Transactional
     public void addAuthor(Author author){
         sessionFactory.getCurrentSession().save(author);
     }

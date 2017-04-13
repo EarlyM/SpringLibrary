@@ -4,11 +4,7 @@
 
     <form method="get"  action="/searchCriterion/search" class="search_form" id="search_form">
 
-
-        <input type="submit" class="button-text"/>
-
-
-        <input type="text"  id="search" name="search" class="search-text"/>
+        <input type="text"  id="search" name="search" placeholder="Поиск" class="search-text"/>
 
         <input type="submit" id="btnSearch" value="Поиск" class="button"/>
 

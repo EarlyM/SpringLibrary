@@ -13,12 +13,8 @@ public class Genre implements Serializable{
     public Genre() {
     }
 
-    public Genre(String name) {
-        this.name = name;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public long getId() {
         return id;

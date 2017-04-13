@@ -61,7 +61,6 @@ public class ApplicationContextConfig {
         properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("current_session_context_class", env.getProperty("current_session_context_class"));
 
-
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setPackagesToScan("ua.library.model.entities");
         sessionFactoryBean.setDataSource(dataSource);

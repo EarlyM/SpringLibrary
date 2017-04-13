@@ -16,14 +16,12 @@ public class PublisherDAOImpl implements PublisherDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
     public Publisher findPublisher(String publisher) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Publisher.class);
         criteria.add(Restrictions.ilike("name", publisher));
         return (Publisher) criteria.uniqueResult();
     }
 
-    @Transactional
     public void save(Publisher publisher) {
         sessionFactory.getCurrentSession().save(publisher);
     }

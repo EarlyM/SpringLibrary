@@ -20,20 +20,31 @@ public class MainController {
     private LibraryService libraryService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(@ModelAttribute("pages") Pages pages,@RequestParam(value = "page", defaultValue = "1") Integer page, Model model, HttpServletRequest request) {
-        if(request.getSession().isNew()){
-            request.getSession().setAttribute("genres", libraryService.getAllGenre());
-            request.getSession().setAttribute("letters", Util.getLetters());
-        }
+    public String index(@ModelAttribute("pages") Pages pages,@RequestParam(value = "page", defaultValue = "1") Integer page, Model model) {
         pages.setSelectPage(page);
         libraryService.getAllBook(pages);
         model.addAttribute("pages", pages);
         return "pages/book";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(@RequestParam(value = "error", required = false) String error, Model model){
+        if(error != null ) model.addAttribute("error", "Не верный логин или пароль");
+
+        return "pages/login";
+    }
+
     @ModelAttribute
     public Pages getPager(){
         return new Pages();
+    }
+
+    @ModelAttribute
+    public void setAttribute(Model model){
+        if(!model.containsAttribute("genres") && !model.containsAttribute("letters")){
+            model.addAttribute("genres", libraryService.getAllGenre());
+            model.addAttribute("letters", Util.getLetters());
+        }
     }
 
 }

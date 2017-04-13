@@ -69,7 +69,7 @@ public class Book implements Serializable{
         this.isbn = isbn;
     }
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "genre_id", nullable = false)
     public Genre getGenre() {
         return genre;
@@ -79,7 +79,7 @@ public class Book implements Serializable{
         this.genre = genre;
     }
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     public Author getAuthor() {
         return author;
@@ -98,7 +98,7 @@ public class Book implements Serializable{
         this.publishYear = publishYear;
     }
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "publisher_id", nullable = false)
     public Publisher getPublisher() {
         return publisher;

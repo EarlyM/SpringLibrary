@@ -39,7 +39,7 @@ body {
 
 .clear { clear: both; }
 
-.logo { width: inherit; float: left; padding-bottom: 25px; }
+.logo {float: left; padding-bottom: 25px; }
 .menu { float: left; margin-top: 30px; width: 370px; font-size: 14px; margin-left: 90px; }
 .menu li {float: left; margin-bottom: 10px; width: 120px;}
 .menu a {color: #606060;}
@@ -154,7 +154,108 @@ body {
 }
 
 .loginForm{
+    width: 725px;
+    float: left;
+}
+
+.loginForm input{
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #838383;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #e2e2e2;
+    float: left;
+    padding: 12px 0px 12px 38px;
+    width: 200px;
+    height: 35px;
+}
+
+.loginForm button{
+    margin-top: 10px;
+    margin-left: 20px;
+    float: left;
+    width: 100px;
+    height: 33px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    background: rgba(96, 146, 95, 0.66);
+    border: none;
+}
+
+.loginForm form{
+    display: block;
     float: right;
+}
+
+.loginForm .help{
+    display: block;
+    width: 100px;
+    float: left;
+    margin-left: 40px;
+    margin-top: 13px;
+}
+
+.loginForm a{
+    text-decoration: none;
+}
+
+.loginForm .a{
+    margin-left: 30px;
+}
+
+.loginForm span{
+    float: right;
+    padding-top: 20px;
+    font-size: 16px;
+}
+
+.login {
+    width: 300px;
+    margin-left: 230px;
+}
+
+.login p{
+    text-align: center;
+    padding-top: 30px;
+    color: red;
+    font-size: 20px;
+    font-style: italic;
+}
+
+.login .helps{
+    display: block;
+    width: 100px;
+    float: left;
+    padding-top: 10px;
+}
+
+.login button{
+    margin-top: 10px;
+    margin-left: 20px;
+    float: right;
+    width: 100px;
+    height: 33px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    background: rgba(96, 146, 95, 0.66);
+    border: none;
+}
+
+.login input{
+    margin-top: 20px;
+    color: #838383;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #e2e2e2;
+    display: block;
+    padding: 12px 0px 12px 38px;
+    width: 300px;
+    height: 35px;
 }
 
 

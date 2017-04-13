@@ -15,12 +15,8 @@ public class Author implements Serializable{
 
     }
 
-    public Author(String fio) {
-        this.fio = fio;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public long getId() {
         return id;

@@ -13,12 +13,9 @@ public class Publisher implements Serializable{
     public Publisher() {
     }
 
-    public Publisher(String name) {
-        this.name = name;
-    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public long getId() {
         return id;

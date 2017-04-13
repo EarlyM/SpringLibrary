@@ -37,7 +37,6 @@ public class BookDAOImpl implements BookDAO{
         projectionList.add(Projections.property("genre"), "genre");
     }
 
-    @Transactional
     public boolean containBook(Book book) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Book.class);
         criteria.add(Restrictions.ilike("name", book.getName()));
@@ -47,62 +46,53 @@ public class BookDAOImpl implements BookDAO{
         return false;
     }
 
-    @Transactional
     public Book findBookById(Long id){
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Book.class);
         criteria.add(Restrictions.eq("id", id));
         return (Book) criteria.uniqueResult();
     }
 
-    @Transactional
+
     public void getAllBooks(Pages pages){
         executeCriterion(pages);
     }
 
-    @Transactional
     public void getBooksByGenre(Long id, Pages pages){
         Criterion criterion = Restrictions.eq("genre.id", id);
         executeCriteria(criterion, pages);
     }
 
-    @Transactional
     public void getBooksByLetter(Character letter, Pages pages){
         Criterion criterion = Restrictions.ilike("b.name", letter.toString(), MatchMode.START);
         executeCriteria(criterion, pages);
     }
 
-    @Transactional
     public void getBooksByAuthor(String author, Pages pages){
         Criterion criterion = Restrictions.ilike("author.fio", author, MatchMode.ANYWHERE);
 
         executeCriteria(criterion, pages);
     }
 
-    @Transactional
     public void getBooksByText(String text, Pages pages){
         Criterion criterion = Restrictions.ilike("b.name", text, MatchMode.ANYWHERE);
 
         executeCriteria(criterion, pages);
     }
 
-    @Transactional
     public void deleteBook(Long id) {
         Session session = sessionFactory.getCurrentSession();
         session.createQuery(DELETE_QUERY).setLong("id",id).executeUpdate();
     }
 
-    @Transactional
     public void addBook(Book book) {
         Session session = sessionFactory.getCurrentSession();
         session.save(book);
     }
 
-    @Transactional
     public void updateBook(Book book) {
         sessionFactory.getCurrentSession().update(book);
     }
 
-    @Transactional
     public Object getFieldValue(Long id, String value){
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Book.class);
         criteria.setProjection(Projections.property(value));

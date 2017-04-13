@@ -38,10 +38,10 @@ public class SearchController {
     }
 
     @ModelAttribute
-    public void setSessionAttribute(HttpServletRequest request){
-        if(request.getSession().isNew()){
-            request.getSession().setAttribute("genres", libraryService.getAllGenre());
-            request.getSession().setAttribute("letters", Util.getLetters());
+    public void setAttribute(Model model){
+        if(!model.containsAttribute("genres") && !model.containsAttribute("letters")){
+            model.addAttribute("genres", libraryService.getAllGenre());
+            model.addAttribute("letters", Util.getLetters());
         }
     }
 
