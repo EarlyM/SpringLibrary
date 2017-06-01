@@ -10,7 +10,7 @@ import ua.library.dao.BookDAO;
 
 import java.util.List;
 
-@Repository(value = "BookDAO")
+@Repository
 public class BookDAOImpl extends GenericDAOImpl<Book, Long> implements BookDAO {
 
     private ProjectionList projectionList;
