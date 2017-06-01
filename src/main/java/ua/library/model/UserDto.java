@@ -1,10 +1,10 @@
 package ua.library.model;
 
-public class User {
+public class UserDto {
     private String username;
     private String password;
 
-    public User() {
+    public UserDto() {
     }
 
     public String getUsername() {

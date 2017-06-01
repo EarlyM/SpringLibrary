@@ -3,15 +3,15 @@ package ua.library.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.library.dao.interfaces.AuthorDAO;
-import ua.library.dao.interfaces.BookDAO;
-import ua.library.dao.interfaces.GenreDAO;
-import ua.library.dao.interfaces.PublisherDAO;
 import ua.library.model.BookForm;
 import ua.library.model.entities.Author;
 import ua.library.model.entities.Book;
 import ua.library.model.entities.Genre;
 import ua.library.model.entities.Publisher;
+import ua.library.dao.AuthorDAO;
+import ua.library.dao.BookDAO;
+import ua.library.dao.GenreDAO;
+import ua.library.dao.PublisherDAO;
 import ua.library.service.AdministrationService;
 
 @Service
@@ -49,7 +49,7 @@ public class AdministrationServiceImpl implements AdministrationService {
         book.setImage(bookForm.getImage().getBytes());
 
         if(!bookDAO.containBook(book)) {
-            bookDAO.addBook(book);
+            bookDAO.save(book);
         }
 
     }
@@ -80,43 +80,44 @@ public class AdministrationServiceImpl implements AdministrationService {
             book.setImage((byte[]) bookDAO.getFieldValue(book.getId(), CONTENT));
         }
 
-        bookDAO.updateBook(book);
+        bookDAO.update(book);
     }
 
     @Override
     public void deleteBook(Long id) {
-        bookDAO.deleteBook(id);
+        Book book = bookDAO.find(id);
+        bookDAO.delete(book);
     }
 
     private Author findAuthor(String fio){
-        Author author = authorDAO.findAuthor(fio);
+        Author author = authorDAO.getByName(fio);
         if(author == null){
             Author newAuthor = new Author();
             newAuthor.setFio(fio);
-            authorDAO.addAuthor(newAuthor);
-            author = authorDAO.findAuthor(fio);
+            authorDAO.save(newAuthor);
+            author = authorDAO.getByName(fio);
         }
         return author;
     }
 
     private Genre findGenre(String name){
-        Genre genre = genreDAO.getGenreByName(name);
+        Genre genre = genreDAO.getByName(name);
         if(genre == null){
             Genre newGenre = new Genre();
             newGenre.setName(name);
             genreDAO.save(newGenre);
-            genre = genreDAO.getGenreByName(name);
+            genre = genreDAO.getByName(name);
         }
         return genre;
     }
 
     private Publisher findPublisher(String name){
-        Publisher publisher = publisherDAO.findPublisher(name);
+        Publisher publisher = publisherDAO.getByName(name);
         if(publisher == null){
             Publisher newPublisher = new Publisher();
             newPublisher.setName(name);
             publisherDAO.save(newPublisher);
-            publisher = publisherDAO.findPublisher(name);
+            publisher = publisherDAO.getByName(name);
         }
         return publisher;
     }

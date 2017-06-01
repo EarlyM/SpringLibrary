@@ -2,7 +2,6 @@ package ua.library.model.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 
 @Entity
 @Table(name = "author")
@@ -26,7 +25,7 @@ public class Author implements Serializable{
         this.id = id;
     }
 
-    @Column(name = "fio")
+    @Column(name = "name")
     public String getFio() {
         return fio;
     }

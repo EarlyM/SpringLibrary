@@ -3,11 +3,11 @@ package ua.library.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.library.dao.interfaces.BookDAO;
-import ua.library.dao.interfaces.GenreDAO;
 import ua.library.model.Pages;
 import ua.library.model.entities.Book;
 import ua.library.model.entities.Genre;
+import ua.library.dao.BookDAO;
+import ua.library.dao.GenreDAO;
 import ua.library.service.LibraryService;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getAllBook(Pages pages) {
-        bookDAO.getAllBooks(pages);
+        bookDAO.getBooks(pages);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public List<Genre> getAllGenre() {
-        return genreDAO.getGenres();
+        return genreDAO.findAll();
     }
 
     @Override
@@ -68,6 +68,6 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public Book findBookById(Long id) {
-        return bookDAO.findBookById(id);
+        return bookDAO.find(id);
     }
 }
