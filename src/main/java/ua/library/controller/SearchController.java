@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.library.model.Pages;
+import ua.library.model.Pagination;
 import ua.library.service.LibraryService;
 import ua.library.service.Util;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/searchCriterion")
@@ -17,23 +15,30 @@ public class SearchController {
     private LibraryService libraryService;
 
     @RequestMapping(value = "/search",method = RequestMethod.GET)
-    public String searchBook(@ModelAttribute("pages") Pages pages,@RequestParam String search, @RequestParam String select,@RequestParam(value = "page", defaultValue = "1") Integer page){
-        pages.setSelectPage(page);
-        libraryService.getBookByText(search, select, pages);
+    public String searchBook(@RequestParam String search, @RequestParam String select, @RequestParam(value = "page", defaultValue = "1") Integer page, Model model){
+        Pagination pagination = null;
+        switch (select){
+            case "book":
+                pagination = libraryService.getBooksOnPage(LibraryService.TEXT_CRITERIA,page,search);
+                break;
+            case "author":
+                pagination = libraryService.getBooksOnPage(LibraryService.AUTHOR_CRITERIA, page, search);
+                break;
+        }
+
+        model.addAttribute("pages", pagination);
         return "pages/book";
     }
 
     @RequestMapping(value = "/genre", method = RequestMethod.GET)
-    public String searchBookByGenre(@ModelAttribute("pages") Pages pages,@RequestParam("id") Long id,@RequestParam(value = "page", defaultValue = "1") Integer page){
-        pages.setSelectPage(page);
-        libraryService.getBookByGenre(id, pages);
+    public String searchBookByGenre(@RequestParam("id") Long id, @RequestParam(value = "page", defaultValue = "1") Integer page, Model model){
+        model.addAttribute("pages", libraryService.getBooksOnPage(LibraryService.GENRE_CRITERIA, page, id));
         return "pages/book";
     }
 
     @RequestMapping(value = "/letter", method = RequestMethod.GET)
-    public String searchBookByLetter(@ModelAttribute("pages") Pages pages,@RequestParam(value = "page", defaultValue = "1") Integer page,@RequestParam("letter") Character letter){
-        pages.setSelectPage(page);
-        libraryService.getBookByLetter(letter, pages);
+    public String searchBookByLetter(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam("letter") Character letter, Model model){
+        model.addAttribute("pages", libraryService.getBooksOnPage(LibraryService.LETTER_CRITERIA, page, letter));
         return "pages/book";
     }
 

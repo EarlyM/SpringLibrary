@@ -41,7 +41,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addBook(@Valid @ModelAttribute("bookForm") BookForm bookForm, BindingResult bindingResult, Model model){
+    public String addBook(@Valid @ModelAttribute("bookForm") BookForm bookForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "pages/form";
         }

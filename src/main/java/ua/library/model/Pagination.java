@@ -4,17 +4,16 @@ import ua.library.model.entities.Book;
 
 import java.util.List;
 
-public class Pages {
+public class Pagination {
 
-    private static final Integer DEFAULT_ROWS = 6;
+    private static final Integer DEFAULT_ROWS = 4;
 
-    private Long booksCount;
     private Integer selectPage;
     private Integer rows;
     private Long pageCount;
     private List<Book> books;
 
-    public Pages(){
+    public Pagination(){
         rows = DEFAULT_ROWS;
     }
 
@@ -34,8 +33,12 @@ public class Pages {
         return pageCount;
     }
 
-    public void setPageCount(Long pageCount) {
-        this.pageCount = pageCount;
+    public void setPageCount(Long booksCount) {
+        if(booksCount % rows == 0){
+            pageCount = booksCount/rows;
+        } else {
+            pageCount = booksCount/rows + 1;
+        }
     }
 
     public List<Book> getBooks() {
@@ -54,23 +57,10 @@ public class Pages {
         this.selectPage = selectPage;
     }
 
-    public Long getBooksCount() {
-        return booksCount;
-    }
-
-    public void setBooksCount(Long booksCount) {
-        this.booksCount = booksCount;
-
-        if(booksCount % rows == 0){
-            pageCount = booksCount/rows;
-        } else {
-            pageCount = booksCount/rows + 1;
-        }
-    }
 
     @Override
     public String toString() {
-        return "Pages{" +
+        return "Pagination{" +
                 "selectPage=" + selectPage +
                 ", rows=" + rows +
                 ", pageCount=" + pageCount +

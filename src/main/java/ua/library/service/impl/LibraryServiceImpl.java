@@ -3,7 +3,7 @@ package ua.library.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.library.model.Pages;
+import ua.library.model.Pagination;
 import ua.library.model.entities.Book;
 import ua.library.model.entities.Genre;
 import ua.library.dao.BookDAO;
@@ -25,33 +25,6 @@ public class LibraryServiceImpl implements LibraryService {
     private GenreDAO genreDAO;
 
     @Override
-    public void getAllBook(Pages pages) {
-        bookDAO.getBooks(pages);
-    }
-
-    @Override
-    public void getBookByText(String text, String searchCriteria, Pages pages) {
-        switch (searchCriteria){
-            case "book":
-                bookDAO.getBooksByText(text, pages);
-                break;
-            case "author":
-                bookDAO.getBooksByAuthor(text, pages);
-                break;
-        }
-    }
-
-    @Override
-    public void getBookByGenre(Long id, Pages pages) {
-        bookDAO.getBooksByGenre(id, pages);
-    }
-
-    @Override
-    public void getBookByLetter(Character letter, Pages pages) {
-        bookDAO.getBooksByLetter(letter, pages);
-    }
-
-    @Override
     public List<Genre> getAllGenre() {
         return genreDAO.findAll();
     }
@@ -69,5 +42,15 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public Book findBookById(Long id) {
         return bookDAO.find(id);
+    }
+
+    @Override
+    public Pagination getBooksOnPage(int query, int page, Object criteria){
+        Pagination pagination = new Pagination();
+        pagination.setSelectPage(page);
+        bookDAO.createCriteria(query, criteria);
+        pagination.setPageCount(bookDAO.bookCount());
+        pagination.setBooks(bookDAO.getRowBook(pagination.getFrom(), pagination.getTo()));
+        return pagination;
     }
 }
