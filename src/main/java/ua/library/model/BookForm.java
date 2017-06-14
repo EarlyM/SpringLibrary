@@ -36,7 +36,10 @@ public class BookForm {
     @Size(min = 1, max = 30, message = "Введите кто опубликовал книгу")
     private String publisher;
 
+    @NotNull
     private CommonsMultipartFile image;
+
+    @NotNull
     private CommonsMultipartFile content;
 
     public BookForm(){

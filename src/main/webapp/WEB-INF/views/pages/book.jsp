@@ -19,7 +19,7 @@
 
         <div class="book_list">
             <div class="right-content">
-                <sec:authorize access="hasRole('ADMIN')">
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <div class="add-div"><button class="add-button"><a class="" href="/admin/form">Добавить</a></button></div>
                 </sec:authorize>
                 <c:forEach items="${pages.books}" var="b">
@@ -38,13 +38,15 @@
                         </div>
                         <button class="mr"><a class="read" href="/content/read=${b.id}" target="_blank">Читать</a></button>
                         <button class="mr"><a class="download" href="/content/download/id=${b.id}&name=${b.name}">Скачать</a></button>
-                        <sec:authorize access="hasRole('ADMIN')">
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <button class="mr"><a class="edit" href="/admin/form?id=${b.id}">Изменить</a></button>
                         <button class="delete-button"><a class="delete" href="/admin/delete?id=${b.id}">Удалить</a></button>
                         </sec:authorize>
                     </div>
                 </c:forEach>
             </div>
+
+            ${pageContext.request.userPrincipal}
 
             <div class="pagination">
                 <c:if test="${pages.pageCount > 1}">
